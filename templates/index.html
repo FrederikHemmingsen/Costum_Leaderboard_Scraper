@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Danish Time Trials</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .leaderboard {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px 0;
+        }
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 10px 0;
+            padding: 20px;
+            transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .position {
+            font-size: 2em;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+        .gold {
+            color: gold;
+        }
+        .silver {
+            color: silver;
+        }
+        .bronze {
+            color: #cd7f32;
+        }
+        .card-content {
+            flex-grow: 1;
+        }
+        .card h2 {
+            margin: 0 0 10px;
+            font-size: 1.5em;
+            color: #333;
+        }
+        .card p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .card p span {
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Danish Time Trials</h1>
+    <p>Din tid skal være top 200 og din konto skal være fra Danmark så kommer du på listen</p>
+    <div class="leaderboard">
+        {% for row in data %}
+        <div class="card">
+            <div class="position {% if loop.index == 1 %}gold{% elif loop.index == 2 %}silver{% elif loop.index == 3 %}bronze{% endif %}">{{ loop.index }}</div>
+            <div class="card-content">
+                <h2>{{ row['Player'] }}</h2>
+                
+                <p><span>Time:</span> {{ row['Time'] }}</p>
+                <p><span>Model:</span> {{ row['Model'] }}</p>
+                <p><span>Date:</span> {{ row['Date'] }}</p>
+                <p><span>Official position:</span> {{ row['#'] }}</p>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
